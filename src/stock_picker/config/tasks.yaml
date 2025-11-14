@@ -1,0 +1,42 @@
+find_trending_companies:
+  description: >
+    Find trending companies in the news in {sector} sector in India based on the latest news.
+    Don't hesitate to find new companies that are not already in the list.
+  expected_output: >
+    A list of 2-3 companies that are currently trending in the news.
+  agent: trending_company_finder
+  output_file: output/trending_companies.json
+
+research_trending_companies:
+  description: >
+    Conduct comprehensive research on the trending companies identified in the previous task.
+    Focus on:
+    1. Current company status and health
+    2. Historical company performance
+    3. Major challenges and opportunities
+    4. Recent news and events
+    5. Future outlook and potential developments
+    6. Stock performance and investment potential
+
+    Organize your findings in a structured format with clear sections.
+  expected_output: >
+    A comprehensive research document for each trending company with well-organized sections covering
+    all the requested aspects. Include specific facts, and examples where relevant.
+  agent: financial_researcher
+  context:
+    - find_trending_companies
+  output_file: output/research_report.json
+
+pick_best_company:
+  description: >
+    Given a list of researched companies with investment potential, select the best one for investment.
+    Send a push notification to the user about the selected company with a one line rationale.
+    Then respond with a detailed report on the selected company and which companies were not selected.
+    Ensure that you do not pick the same company again and again.
+  expected_output: >
+    A detailed report on the selected company, including reasons for selection,
+    investment potential, and any relevant financial metrics. Notify the user of the selection; which companies were not selected and why.
+  agent: stock_picker
+  context:
+    - research_trending_companies
+  output_file: output/decision.md

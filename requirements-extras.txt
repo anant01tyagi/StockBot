@@ -1,0 +1,9 @@
+# Optional extras for memory/storage/backends — install only if you use those features
+chromadb
+sentence-transformers
+faiss-cpu
+sqlalchemy
+aiosqlite
+
+# These packages are commonly needed for vector DBs / embedding backends and SQLite-based async access.
+# Install them only if your chosen RAG/embedding/storage requires them.

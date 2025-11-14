@@ -1,0 +1,14 @@
+# requirements.txt (generated)
+# Core dependency declared in pyproject.toml
+crewai[tools]>=0.148.0,<1.0.0
+
+# Additional packages used directly in code (not guaranteed bundled by crewai extras):
+pydantic>=1.10.0
+openai>=0.27.0
+
+# Notes / assumptions:
+# - `crewai[tools]` is declared in pyproject.toml and should provide crewai and tools like crewai_tools/SerperDevTool.
+# - `openai` is included because RAGStorage embedder config references an "openai" provider.
+# - `pydantic` is included explicitly since the code uses Pydantic models.
+# - Local module `src/stock_picker/tools/push_tool.py` provides PushNotificationTool and does not need to be installed.
+# If you want stricter pinning, run `pip-compile` or provide exact versions.
