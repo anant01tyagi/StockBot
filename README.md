@@ -1,54 +1,170 @@
-# StockPicker Crew
+# 📈 StockPicker – AI Agentic Stock Recommendation Bot
 
-Welcome to the StockPicker Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+### Powered by CrewAI • Sector-based Company Research • Autonomous Multi-Agent Workflow
 
-## Installation
+StockPicker is an **AI-powered multi-agent system** that researches companies within a given sector and recommends the **best investment candidate** based on real-time data, financial analysis, and market sentiment.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+This project is built using **CrewAI**, leverages **Serper API** for search, and uses a structured **hierarchical agent workflow** to identify trending companies, research them, and produce an investment recommendation.
 
-First, if you haven't already, install uv:
+---
+
+## 🚀 Features
+
+- 🔎 **Trending Company Discovery**  
+  Uses search tools to find currently relevant and news-driven companies in a given sector.
+
+- 📊 **Financial & Market Research**  
+  Multi-dimensional analysis:
+
+  - competitive position
+  - future outlook
+  - investment potential & risks
+
+- 🧠 **Memory-Enhanced Agents**  
+  Uses:
+
+  - **Short-Term Memory (RAG-based)**
+  - **Long-Term Memory (SQLite)**
+  - **Entity Memory**  
+    to maintain context across tasks.
+
+- 🤖 **Hierarchical CrewAI Workflow**  
+  Manager agent oversees 3 domain-specific agents and coordinates the entire process.
+
+- 🧩 **Modular Config Structure**  
+  Agents and tasks defined in:
+
+  - `config/agents.yaml`
+  - `config/tasks.yaml`
+
+- 📦 **Extensible & Production-Ready**  
+  Easy to plug into an API, UI, or extend with new tools and research workflows.
+
+---
+
+## 🧠 System Architecture
+
+The project uses a **three-agent crew** orchestrated by a manager:
+
+### **1. Trending Company Finder**
+
+- Searches for companies in a chosen sector
+- Uses **SerperDevTool** for search
+- Stores memory for improved context over multiple runs
+
+### **2. Financial Researcher**
+
+- Deep dive into each trending company
+- Analyzes market position, future outlook, and risk
+
+### **3. Stock Picker**
+
+- Compares all researched companies
+- Provides a ranked investment recommendation
+- Uses memory for consistent reasoning
+
+### **Manager Agent**
+
+- Delegates tasks
+- Oversees hierarchical execution
+- Ensures all agents collaborate effectively
+
+---
+
+## 🔧 How It Works (Flow)
+
+1. **Input sector**  
+   User provides a sector (e.g., “Renewable Energy”, “AI”, “FinTech”).
+
+2. **Find Trending Companies**  
+   The Trending Company Finder agent searches and returns a list of companies & reasons they're trending.
+
+3. **Research Each Company**  
+   The Financial Researcher agent compiles structured research:
+
+   - Market position
+   - Competitive analysis
+   - Risk assessment
+   - Future potential
+
+4. **Pick The Best Investment**  
+   The Stock Picker agent evaluates all research and recommends:
+   - Best company
+   - Rationale
+   - Confidence factors
+
+---
+
+## 🧪 Running the Crew
+
+### 1. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Set environment variables
+
+```
+SERPER_API_KEY=your_key
+OPENAI_API_KEY=your_key
+```
+
+### 3. Install uv
 
 ```bash
 pip install uv
+uv run
 ```
 
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/stock_picker/config/agents.yaml` to define your agents
-- Modify `src/stock_picker/config/tasks.yaml` to define your tasks
-- Modify `src/stock_picker/crew.py` to add your own logic, tools and specific args
-- Modify `src/stock_picker/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+### 4. Run Crew
 
 ```bash
-$ crewai run
+crewai run
 ```
 
-This command initializes the stock_picker Crew, assembling the agents and assigning them tasks as defined in your configuration.
+---
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## 📝 Pydantic Models
 
-## Understanding Your Crew
+The system outputs structured data using:
 
-The stock_picker Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+- TrendingCompany
+- TrendingCompanyList
+- TrendingCompanyResearch
+- TrendingCompanyResearchList
 
-## Support
+This keeps your output clean, predictable, and API-friendly.
 
-For support, questions, or feedback regarding the StockPicker Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+---
 
-Let's create wonders together with the power and simplicity of crewAI.
+## 🧱 Built With
+
+- Python
+- CrewAI
+- SerperDevTool
+- OpenAI Embeddings
+- LTMSQLite Storage
+- RAG-based Short-Term Memory
+
+---
+
+## 🛣️ Roadmap
+
+- [ ] Add quantitative financial data (ratios, revenue, YoY growth)
+- [ ] Integrate real stock price API
+- [ ] Add GUI (Streamlit / Gradio)
+- [ ] Export research reports as PDFs
+
+---
+
+## 🤝 Contributing
+
+PRs welcome!  
+Please open an issue before submitting major changes.
+
+---
+
+## 📜 License
+
+MIT License.
